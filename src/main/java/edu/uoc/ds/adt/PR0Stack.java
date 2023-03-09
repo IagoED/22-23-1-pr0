@@ -9,20 +9,32 @@ public class PR0Stack {
     // Capacitat màxima de la seqüència.
     public final int CAPACITY = 9;
 
-    private Stack<Character> stack;
+    private Stack<Integer> stack;
 
     public PR0Stack() {
         newStack();
     }
 
     public void newStack() {
-        stack = new StackArrayImpl<Character>(CAPACITY);
+        stack = new StackArrayImpl<Integer>(CAPACITY);
     }
 
 
     public void fillStack() {
-        for (char c = '0'; c < '9'; c++) {
-            stack.push(Character.valueOf(c));
+        int num = 2;
+        boolean esPrimo = true;
+        while(stack.size() < CAPACITY){
+            esPrimo = true;
+            for(int i = 2;i < num;i++){
+                if(num % i == 0){
+                    esPrimo = false;
+                    break;
+                }
+            }
+            if(esPrimo){
+                stack.push(num);
+            }
+            num++;
         }
     }
 
@@ -33,7 +45,7 @@ public class PR0Stack {
         return sb.toString();
     }
 
-    public Stack<Character> getStack() {
+    public Stack<Integer> getStack() {
         return this.stack;
     }
 }
